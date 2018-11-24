@@ -1,2 +1,2 @@
-// 入口文件
-console.log('OK')      
+// 这是入口文件
+console.log('OK')    
