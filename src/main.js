@@ -11,6 +11,8 @@ import { Header } from "mint-ui";
 Vue.component(Header.name, Header);
 // 导入 底部菜单栏所需要的 mui文件
 import "./lib/mui/css/mui.css";
+// 导入 底部图标所有到的css
+import "./lib/mui/css/icons-extra.css"
 
 
 
