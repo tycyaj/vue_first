@@ -11,10 +11,22 @@ Vue.use(VueRouter);
 import VueResource from "vue-resource";
 Vue.use(VueResource)
 
+//定义全局过滤器    /使用 nodeJs 中的 moment  安装 npm i moment -s  
+// 导入格式化时间插件
+import moment from "moment";
+Vue.filter("dateFormat", function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
+    return moment(dataStr).format(pattern)
+})
+
+
 //导入 app 根组件 
 import App from "./App.vue"
 //导入 mint-UI 中的组件   按需导入 并且手动注册按需导入的组件
-import {Header,Swipe,SwipeItem} from "mint-ui";
+import {
+    Header,
+    Swipe,
+    SwipeItem
+} from "mint-ui";
 Vue.component(Header.name, Header);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
