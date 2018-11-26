@@ -7,7 +7,7 @@ import VueRouter from "vue-router"
 //1.2 安装路由
 Vue.use(VueRouter);
 
-//2.1  导入 vue-resource 
+//2.1  导入 vue-resource  
 import VueResource from "vue-resource";
 Vue.use(VueResource)
 
