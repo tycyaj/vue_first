@@ -3,8 +3,10 @@
     <!-- 顶部 header 区域 -->
     <mt-header fixed title="集团首页"></mt-header>
 
-    <!-- 中间路由 区域 -->
-    <router-view></router-view>
+    <!-- 中间路由 区域 页面滑动动画 transition上加mode="out-in" 或者 v-leave-to 加 position: absolute;-->
+    <transition> 
+      <router-view></router-view>
+    </transition>
     
     <!-- 底部 tabbar 区域  -->
     <nav class="mui-bar mui-bar-tab">
@@ -40,7 +42,21 @@
 
 
 <style lang="scss" scoped>
-  .app_container {
-    padding-top: 40px;
-  }
+.app_container {
+  padding-top: 40px;
+  overflow-x: hidden;
+}
+.v-enter {
+  opacity: 0;
+  transform: translate(100%);
+}
+.v-leave-to {
+  opacity: 0;
+  transform: translate(-100%);
+  position: absolute;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.5s ease;
+}
 </style>
