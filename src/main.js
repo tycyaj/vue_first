@@ -25,11 +25,13 @@ import App from "./App.vue"
 import {
     Header,
     Swipe,
-    SwipeItem
+    SwipeItem,
+    Button
 } from "mint-ui";
 Vue.component(Header.name, Header);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Button.name, Button);
 
 
 // 导入 底部菜单栏所需要的 mui文件
