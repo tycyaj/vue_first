@@ -1,10 +1,10 @@
 <template>
   <div class="cmt-container">
-    <h3>发表评论</h3>
+    <!-- <h3>发表评论</h3> -->
     <hr>
     <textarea placeholder="请输入你要BB的内容(最多120字)" maxlength="120" v-model="msg"></textarea>
 
-    <mt-button type="primary" size="large" @click="postcomment(id)">发表凭论</mt-button>
+    <mt-button type="primary" size="large" @click.prevent="postcomment(id)">发表凭论</mt-button>
     <div class="cmt-list" v-for="(item, index) in message[id]" :key="index">
       <div class="cmt-item">
         <div

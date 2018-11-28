@@ -8,6 +8,7 @@ import ShopcarContainer from "./components/tabbar/ShopcarContainer.vue";
 import SearchContainer from "./components/tabbar/SearchContainer.vue";
 import NewList from "./components/newlist/NewList.vue";
 import NewsInfo from "./components/newlist/NewsInfo.vue";
+import PhotoList from "./components/photolist/PhotoList.vue";
 // 2. 创建路由对象
 var router = new VueRouter({
   routes: [//配置路由规则 
@@ -17,7 +18,8 @@ var router = new VueRouter({
     { path: "/shopcar", component: ShopcarContainer},
     { path: "/search", component: SearchContainer },
     { path: "/home/newslist", component:NewList },
-    { path: "/home/newsinfo/:id", component: NewsInfo }
+    { path: "/home/newsinfo/:id", component: NewsInfo},
+    { path: "/home/photolist" , component:PhotoList}
   ],
   linkActiveClass:"mui-active" //覆盖默认路由提供的叫做router-link-active
 })

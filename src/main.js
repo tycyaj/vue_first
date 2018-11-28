@@ -26,13 +26,14 @@ import {
     Header,
     Swipe,
     SwipeItem,
-    Button
+    Button,
+    Lazyload
 } from "mint-ui";
 Vue.component(Header.name, Header);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Button.name, Button);
-
+Vue.use(Lazyload);
 
 // 导入 底部菜单栏所需要的 mui文件
 import "./lib/mui/css/mui.css";
