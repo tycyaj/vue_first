@@ -2,9 +2,9 @@
   <div class="cmt-container">
     <h3>发表评论</h3>
     <hr>
-    <textarea placeholder="请输入你要BB的内容(最多120字)" maxlength="120"></textarea>
+    <textarea placeholder="请输入你要BB的内容(最多120字)" maxlength="120" v-model="msg"></textarea>
 
-    <mt-button type="primary" size="large">发表凭论</mt-button>
+    <mt-button type="primary" size="large" @click="postcomment(id)">发表凭论</mt-button>
     <div class="cmt-list" v-for="(item, index) in message[id]" :key="index">
       <div class="cmt-item">
         <div
@@ -18,25 +18,31 @@
 </template>
 
 <script>
+import { Toast } from "mint-ui";
 export default {
   data() {
     return {
       message: [
         [
           {
-            user_name: "1匿名用户",
+            user_name: "8匿名用户",
+            add_time: "2018-07-19T20:09:30.000Z",
+            content: "我来评论6一下--------"
+          },
+          {
+            user_name: "8匿名用户",
+            add_time: "2018-07-19T20:09:30.000Z",
+            content: "我来评论6一下--------"
+          },
+          {
+            user_name: "------",
             add_time: "2018-01-19T20:09:30.000Z",
-            content: "我来评论一下22"
+            content: "----------"
           },
           {
-            user_name: "2匿名用户",
+            user_name: "--------",
             add_time: "2018-12-19T20:09:30.000Z",
-            content: "我来评论一00下"
-          },
-          {
-            user_name: "3匿名用户",
-            add_time: "2018-11-19T20:09:30.000Z",
-            content: "我来评论一22下"
+            content: "----------"
           }
         ],
         [
@@ -52,6 +58,11 @@ export default {
           }
         ],
         [
+          {
+            user_name: "8匿名用户",
+            add_time: "2018-07-19T20:09:30.000Z",
+            content: "我来评论6一下--------"
+          },
           {
             user_name: "8匿名用户",
             add_time: "2018-07-19T20:09:30.000Z",
@@ -99,6 +110,11 @@ export default {
             user_name: "19匿名用户",
             add_time: "2018-07-19T20:09:30.000Z",
             content: "我来评论6一下--------"
+          },
+          {
+            user_name: "8匿名用户",
+            add_time: "2018-07-19T20:09:30.000Z",
+            content: "我来评论6一下--------"
           }
         ],
         [
@@ -106,9 +122,19 @@ export default {
             user_name: "22匿名用户",
             add_time: "2018-07-19T20:09:30.000Z",
             content: "我来评论6一下--------"
+          },
+          {
+            user_name: "8匿名用户",
+            add_time: "2018-07-19T20:09:30.000Z",
+            content: "我来评论6一下--------"
           }
         ],
         [
+          {
+            user_name: "8匿名用户",
+            add_time: "2018-07-19T20:09:30.000Z",
+            content: "我来评论6一下--------"
+          },
           {
             user_name: "19匿名用户",
             add_time: "2018-07-19T20:09:30.000Z",
@@ -117,26 +143,73 @@ export default {
         ],
         [
           {
+            user_name: "8匿名用户",
+            add_time: "2018-07-19T20:09:30.000Z",
+            content: "我来评论6一下--------"
+          },
+          {
             user_name: "19匿名用户",
             add_time: "2018-07-19T20:09:30.000Z",
             content: "我来评论6一下--------"
           }
         ],
         [
+          {
+            user_name: "8匿名用户",
+            add_time: "2018-07-19T20:09:30.000Z",
+            content: "我来评论6一下--------"
+          },
           {
             user_name: "19匿名用户",
             add_time: "2018-07-19T20:09:30.000Z",
             content: "我来评论6一下--------"
           }
         ]
+      ],
+      msg: "",
+
+      //模拟添加的数据
+      addmore: [
+        {
+          user_name: "tyc01",
+          add_time: Date.now(),
+          content: "我来评论一下"
+        },
+        {
+          user_name: "tyc02",
+          add_time: Date.now(),
+          content: "我来评论一下"
+        },
+        {
+          user_name: "tyc03",
+          add_time: Date.now(),
+          content: "我来评论一下"
+        }
       ]
     };
   },
   props: ["id"],
+  // created(){
+  //   this.arrs();
+  // },
   methods: {
     addmsg(id) {
-      this.message[id] = this.message[id].concat(this.message[id]);
-      console.log(this.message[id]);  //没有数据呀 !!
+      if (this.addmore == "") Toast("没有更多评论");
+      for (var i = 0; i < this.addmore.length; i++) {
+        this.$set(this.message[id], this.message[id].length, this.addmore[i]);
+      }
+      this.addmore = "";
+    },
+
+    postcomment(id) {
+      if (this.msg == "") return Toast("请填写评论信息");
+      var cmt = {
+        user_name: "22匿名用户",
+        add_time: Date.now(),
+        content: this.msg
+      };
+      this.message[id].unshift(cmt);
+      this.msg = "";
     }
   }
 };
