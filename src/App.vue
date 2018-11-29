@@ -37,6 +37,13 @@
 </template>
 
 <script>
+export default{
+  data(){
+    return{
+      
+    }
+  }
+}
 </script>
 
 
@@ -45,6 +52,9 @@
   padding-top: 40px;
   padding-bottom: 50px;
   overflow-x: hidden;
+}
+.mint-header.is-fixed{
+  z-index: 99
 }
 .v-enter {
   opacity: 0;

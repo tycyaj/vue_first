@@ -9,7 +9,27 @@ Vue.use(VueRouter);
 
 //2.1  导入 vue-resource  
 import VueResource from "vue-resource";
-Vue.use(VueResource)
+Vue.use(VueResource);
+
+// 安装图片预览插件
+import VuePreview from 'vue-preview';
+Vue.use(VuePreview);
+Vue.use(VuePreview, {
+    mainClass: 'pswp--minimal--dark',
+    barsSize: {
+        top: 0,
+        bottom: 0
+    },
+    captionEl: false,
+    fullscreenEl: false,
+    shareEl: false,
+    bgOpacity: 0.25,
+    tapToClose: true,
+    tapToToggleControls: false
+})
+
+
+
 
 //定义全局过滤器    /使用 nodeJs 中的 moment  安装 npm i moment -s  
 // 导入格式化时间插件
@@ -18,22 +38,26 @@ Vue.filter("dateFormat", function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
     return moment(dataStr).format(pattern)
 })
 
-
 //导入 app 根组件 
 import App from "./App.vue"
 //导入 mint-UI 中的组件   按需导入 并且手动注册按需导入的组件
-import {
-    Header,
-    Swipe,
-    SwipeItem,
-    Button,
-    Lazyload
-} from "mint-ui";
-Vue.component(Header.name, Header);
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
-Vue.component(Button.name, Button);
-Vue.use(Lazyload);
+// import {
+//     Header,
+//     Swipe,
+//     SwipeItem,
+//     Button,
+//     Lazyload
+// } from "mint-ui";
+// Vue.component(Header.name, Header);
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+// Vue.component(Button.name, Button);
+// Vue.use(Lazyload);
+import MintUi from "mint-ui";
+Vue.use(MintUi);
+import "mint-ui/lib/style.css"; 
+
+
 
 // 导入 底部菜单栏所需要的 mui文件
 import "./lib/mui/css/mui.css";

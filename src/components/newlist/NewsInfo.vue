@@ -6,24 +6,25 @@
       <span>点击：{{newInfoData[this.id].click}}次</span>
     </p>
     <hr class="hr">
+    <!-- 描述 -->
     <div class="content">
       <p>{{newInfoData[this.id].zhaiyao}}</p>
       <img :src="newInfoData[this.id].imgUrl" alt>
       <p v-html="newInfoData[this.id].content"></p>
     </div>
-    <!-- 评论区域 -->
+    <!-- 评论区域 子组件s-->
     <comment-box :id="this.id"></comment-box>
   </div>
 </template>
 
 <script>
 //导入 评论子组件
-import comment from "../subcomponents/comment.vue"
+import comment from "../subcomponents/comment.vue";
 export default {
   data() {
     return {
       //http://localhost:3000/#/home/newsinfo/12   获取传递的参数中的id
-      id: this.$route.params.id,
+      id: this.$route.params.id, 
       newInfoData: [
         {
           id: 0,
