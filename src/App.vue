@@ -1,7 +1,11 @@
 <template>
   <div class="app_container">
     <!-- 顶部 header 区域 -->
-    <mt-header fixed title="集团首页"></mt-header>
+    <mt-header fixed title="我爱我家首页">
+      <span slot="left" @click="goBack" v-show="flag">
+        <mt-button icon="back">返回</mt-button>
+      </span>
+    </mt-header>
 
     <!-- 中间路由 区域 页面滑动动画 transition上加mode="out-in" 或者 v-leave-to 加 position: absolute;-->
     <transition>
@@ -37,13 +41,32 @@
 </template>
 
 <script>
-export default{
-  data(){
-    return{
-      
+export default {
+  data() {
+    return {
+      flag: false
+    };
+  },
+  methods: {
+    goBack() {
+      // 点击后退
+      this.$router.go(-1);
     }
+  },
+  watch: {
+    "$route.path": function(newval) {
+      if (newval === "/home") {
+        this.flag = false;
+      } else {
+        this.flag = true;
+      }
+    }
+  },
+  created(){
+    // 更进入页面判断返回按钮在home页面是隐藏 负责显示
+    this.flag = this.$route.path === "/home" ? false : true;
   }
-}
+};
 </script>
 
 
@@ -53,8 +76,8 @@ export default{
   padding-bottom: 50px;
   overflow-x: hidden;
 }
-.mint-header.is-fixed{
-  z-index: 99
+.mint-header.is-fixed {
+  z-index: 99;
 }
 .v-enter {
   opacity: 0;
