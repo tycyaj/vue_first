@@ -11,7 +11,7 @@
             :class="['mui-control-item',item.id == 0 ? 'mui-active' : '']"
             v-for="item in navData"
             :key="item.id"
-            @click="getPhotoImg(item.id)"
+            @tap="getPhotoImg(item.id)"
           >{{item.title}}</a>
         </div>
       </div>

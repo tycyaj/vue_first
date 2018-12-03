@@ -20,7 +20,7 @@ import comment from "../subcomponents/comment.vue";
 export default {
   data() {
     return {
-      // 获取把路由中获取的id
+      // 获取路由中获取的id
       id: this.$route.params.id,
       slide1: [
         [

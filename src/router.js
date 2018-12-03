@@ -10,6 +10,10 @@ import NewList from "./components/newlist/NewList.vue";
 import NewsInfo from "./components/newlist/NewsInfo.vue";
 import PhotoList from "./components/photolist/PhotoList.vue";
 import PhotoInfo from "./components/photolist/PhotoInfo.vue";
+import GoodsList from "./components/goodslist/GoodsList.vue";
+import GoodsInfo from "./components/goodslist/GoodsInfo.vue";
+import GoodsDesc from "./components/goodslist/GoodsDesc.vue";
+import GoodsComment from "./components/goodslist/GoodsComment.vue";
 // 2. 创建路由对象
 var router = new VueRouter({
   routes: [//配置路由规则 
@@ -21,7 +25,11 @@ var router = new VueRouter({
     { path: "/home/newslist", component:NewList },
     { path: "/home/newsinfo/:id", component: NewsInfo},
     { path: "/home/photolist" , component:PhotoList},
-    { path: "/home/photoinfo:id",component: PhotoInfo}
+    { path: "/home/photoinfo:id",component: PhotoInfo},
+    { path: "/home/goodslist" , component:GoodsList},
+    { path: "/home/goodsinfo/:id",component: GoodsInfo},
+    { path: "/home/goodsdesc/:id",component: GoodsDesc, name: "goodsdesc"},
+    { path: "/home/goodscomment/:id",component: GoodsComment, name: "goodscomment"},
   ],
   linkActiveClass:"mui-active" //覆盖默认路由提供的叫做router-link-active
 })

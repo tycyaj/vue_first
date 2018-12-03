@@ -1,12 +1,10 @@
 <template>
   <div>
-    <mt-swipe :auto="4000">
-      <!-- v-for="item in lunBoList" :key="item.id" -->
-      <mt-swipe-item v-for="item in lunBoList" :key="item.id">
-        <img :src="item.imgUrl" alt>
-      </mt-swipe-item>
-    </mt-swipe>
+    
+    <!-- 轮播区域 -->
+    <swiper :lunBoList="lunBoList" :isFull="true"></swiper>
 
+    <!-- 九宫格区域 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <router-link to="/home/newslist">
@@ -21,10 +19,10 @@
         </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
+        <router-link to="/home/goodslist">
           <img src="../../images/menu3.png">
           <div class="mui-media-body">商品购买</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <a href="#">
@@ -45,10 +43,13 @@
         </a>
       </li>
     </ul>
+
   </div>
 </template>
 
 <script>
+import swiper from "../subcomponents/swiper.vue"
+
 import { Toast } from "mint-ui";
 export default {
   data() {
@@ -61,6 +62,10 @@ export default {
         { status: 0, id: 3, imgUrl: require("../../images/ban04.png") }
       ]
     };
+  },
+  components:{
+    swiper   
+    // 导入轮播组件
   },
   created() {
     // this.indexLunbo();
@@ -83,22 +88,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mint-swipe {
-  height: 165px;
-
-  img {
-    width: 100%;
-    height: 100%;
+  .mui-grid-view.mui-grid-9 {
+    background-color: #fff;
+    border: none;
   }
-}
-.mui-grid-view.mui-grid-9 {
-  background-color: #fff;
-  border: none;
-}
-.mui-grid-view.mui-grid-9 .mui-table-view-cell {
-  border: none;
-}
-.mui-grid-view.mui-grid-9 .mui-table-view-cell img {
-  width: 60px;
-}
+  .mui-grid-view.mui-grid-9 .mui-table-view-cell {
+    border: none;
+  }
+  .mui-grid-view.mui-grid-9 .mui-table-view-cell img {
+    width: 60px;
+  }
 </style>

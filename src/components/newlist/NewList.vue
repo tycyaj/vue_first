@@ -123,6 +123,7 @@ export default {
 <style lang="scss" scoped>
 .mui-table-view {
   li {
+    padding: 10px 12px;
     h1 {
       font-size: 14px;
     }
