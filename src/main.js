@@ -15,6 +15,55 @@ Vue.use(VueResource);
 import VuePreview from 'vue-preview';
 Vue.use(VuePreview);
 
+// cnpm i vuex - S  安装后导入vuex包 并注册 
+import Vuex from "vuex";
+Vue.use(Vuex);
+
+// new 实例 得到一个数据仓储对象
+// 在一开始执行main.js时 先从本地存储中 把购物车的数据读出来
+var car = JSON.parse(localStorage.getItem('car') || '[]');
+
+var store = new Vuex.Store({
+    state: { //  获取state中的数据方法: this.$store.state.方法名
+        // 数据存放的地方
+        // 购物车商品的数据  存储一些商品的对象 
+        // 例如:{id:商品的id,count:要购买的数量,price:商品的单价,selected:false}       
+        car: car
+    },
+    mutations: { //  this.$store.commit('方法的名称'，按需传递的唯一参数)
+        // 处理数据的地方
+        addToCar(state, addcardata) {
+            //  定义一个标识符  
+            var flag = false;
+            // 循环当前购物车 car 判断是否已经有了该商品
+            state.car.some(item => {
+                if (item.id == addcardata.id) {
+                    //说明购物车中已经有这个商品了  只需要更新数量
+                    item.count += parseInt(addcardata.count)
+                    // 退出后续循环
+                    flag = true;
+                    return true 
+                }
+            })
+            // 循环完毕还是没找到就直接把 addcardata 对象push进 car 数组中
+            if (!flag){
+                state.car.push(addcardata)
+            }
+            //当更新Car之后  把car数组  存储到本地 localStorage
+            localStorage.setItem("car",JSON.stringify(state.car))
+
+        }
+    },
+    getters: { // this.$store.getters.***
+        getAllCount(state){
+            var c = 0;
+            state.car.forEach(item =>{
+                c+=item.count
+            })
+            return c
+        }
+    }
+})
 
 
 //定义全局过滤器    /使用 nodeJs 中的 moment  安装 npm i moment -s  
@@ -41,7 +90,7 @@ import App from "./App.vue"
 // Vue.use(Lazyload);
 import MintUi from "mint-ui";
 Vue.use(MintUi);
-import "mint-ui/lib/style.css"; 
+import "mint-ui/lib/style.css";
 
 
 
@@ -60,6 +109,6 @@ import router from "./router.js"
 var vm = new Vue({
     el: "#app",
     render: c => c(App),
-    router //1.4挂载路由对象到 vm 实例
-     
+    router, //1.4挂载路由对象到 vm 实例
+    store // 挂在 store 状态管理对象
 })

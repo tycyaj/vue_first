@@ -25,7 +25,27 @@
             <span class="now_price">￥{{ goodsInfoData[id].sell_price }}</span>
           </p>
           <p>购买数量：
-            <numbox></numbox>
+            <!-- 子组件向父组件传值   @getcount="getSelectedCount"
+            父组件中:
+                1.  父组件自定义方法名  @getcount   方法为：getSelectedCount
+                2.  方法 getSelectedCount 定义形参 count 以便接受子组件传来的值 并保存在 data 中
+            子组件中:
+                3.  在子组件中需要传值的地方 定义方法 @click 或者 @change 方法  方法名为 countChanged
+                4.  通过 ref 属性 获取当前需要传递的值    ref="numbox"
+                5.  在方法中使用 this.$emit('getcount',parseInt(this.$refs.numbox.value)) 向父组件传递
+                    其中 getcound 为父组件中的方法名   this.$refs.numbox.value 为向父组件传递的值
+                    
+                    父组件方法中的参数 count 就是子组件传递过来的值
+            -->
+            <numbox @getcount="getSelectedCount" :max="goodsInfoData[id].stock_quantity"></numbox>
+
+            <!-- 父组件向子组件传值  :max="goodsInfoData[id].stock_quantity"
+
+                  1.父组件自定义绑定属性 :max  值为需要传递的值  "goodsInfoData[id].stock_quantity"
+                  2.子组件中使用 props 选项接收  props:["max"]
+                  3.子组件接收后使用  :data-numbox-max="max" 绑定值
+ 
+            -->
           </p>
           <p>
             <mt-button type="primary" size="small">立即购买</mt-button>
@@ -117,7 +137,8 @@ export default {
         { id: 3, src: require("../../images/gs3.png") },
         { id: 4, src: require("../../images/gs5.png") }
       ],
-      ballFlag: false //控制小球显示隐藏的标识符
+      ballFlag: false, //控制小球显示隐藏的标识符
+      selectCount: 1
     };
   },
   components: {
@@ -146,7 +167,19 @@ export default {
     // 小球  添加购物车
     addToShopCar() {
       this.ballFlag = !this.ballFlag;
+      // {id:商品的id,count:要购买的数量,price:商品的单价,selected:false}
+      // 拼接出一个对象 保存在 store 中的car数组中
+      var addcardata = {
+        id: this.id,
+        count: this.selectCount,
+        price: this.goodsInfoData[this.id].sell_price,
+        selected: false
+      };
+      // 通过 store.commit 方法 将商品加入购物车
+      this.$store.commit('addToCar',addcardata)
+      console.log(addcardata);
     },
+    // 小球动画
     beforeEnter(el) {
       el.style.transform = "translate(0,0)";
     },
@@ -165,13 +198,17 @@ export default {
 
       const xDist = badgePosition.left - ballPosition.left;
       const yDist = badgePosition.top - ballPosition.top;
-      
+
       el.style.transform = `translate( ${xDist}px , ${yDist}px )`;
-      el.style.transition = "all 1s cubic-bezier(.2,-0.3,0.5,.4)";
+      el.style.transition = "all 0.8s cubic-bezier(.2,-0.3,0.5,.4)";
       done();
     },
     afterEnter(el) {
       this.ballFlag = !this.ballFlag;
+    },
+    getSelectedCount(count) {
+      this.selectCount = count;
+      console.log(this.selectCount);
     }
   }
 };
